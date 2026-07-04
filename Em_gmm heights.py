@@ -6,27 +6,28 @@ DATA_PATH = "GaltonFamilies.csv"
 header = np.genfromtxt(DATA_PATH, delimiter= ',', dtype=str, max_rows = 1)
 col = {name: i for i, name in enumerate(header)}
 
-# Read the rest of the file as raw strings (mixed dtypes -> keep as str,
-# convert only the numeric columns we actually need)
+# Read the rest of the file as raw strings and pconvert only the numeric columns we actually need
 rows = np. genfromtxt(DATA_PATH, delimiter= ',', dtype= str, skip_header = 1)
 
 family = rows[:, col["family"]]
 father =  rows [:, col["father"]].astype(float)
 child_heights = rows[:, col["childHeight"]].astype(float)
 
-# One father height per family (avoid re-using the same father's height
-# once per child -- that would bias the "adult" cluster). np.unique with
-# return_index gives the position of each family's FIRST appearance.
+"""One father height per family (avoid re-using the same father's height
+once per child -- that would bias the "adult" cluster). np.unique with
+return_index gives the position of each family's FIRST appearance.
+"""
 
 _, first_idx = np.unique(family, return_index = True)
 father_heights = father[first_idx]
 
 X = np.concatenate([child_heights, father_heights])
 
-# Ground-truth origin of each point (0 = child, 1 = father/adult). EM never
-# sees this -- it is kept ONLY so we can later score how well an unsupervised
-# method recovers the true groups (needed for the "why not just split at the
-# mean" comparison).
+""" Ground-truth origin of each point (0 = child, 1 = father/adult). EM never
+sees this, it is kept ONLY so we can later score how well an unsupervised
+method recovers the true groups (needed for the "why not just split at the
+mean" comparison).
+"""
 labels_true = np.concatenate([np.zeros(len(child_heights)),
                                np.ones(len(father_heights))])
 
@@ -99,11 +100,11 @@ print(f"\nConverged at iteration {final[0]}:")
 print(f"  Children -> mu={mu1f:.3f}, sigma={np.sqrt(s1f):.3f}, pi={pi1f:.3f}")
 print(f"  Pros     -> mu={mu2f:.3f}, sigma={np.sqrt(s2f):.3f}, pi={pi2f:.3f}")
 
-# NAIVE BASELINE vs EM -- "just split at the global mean?"
-#
-# We use the true child/father origin (never shown to EM) purely to score
-# accuracy here, this is the evidence for the "should you just split at
-# the mean" discussion.
+"""NAIVE BASELINE vs EM "just split at the global mean?"
+ We use the true child/father origin (never shown to EM) purely to score
+ accuracy here, this is the evidence for the "should you just split at
+ the mean".
+ """
 
 global_mean = X.mean()
 naive_pile_child = X[X < global_mean]
@@ -121,8 +122,8 @@ em_accuracy = np.mean(em_pred_child == (labels_true == 0))
 naive_accuracy = np.mean(naive_pred_child == (labels_true == 0))
 
 print(f"\nNaive split at global mean ({global_mean:.3f}):")
-print(f"  'Child' pile  -> mean={naive_mu_child:.3f}, n={len(naive_pile_child)}")
-print(f"  'Adult' pile  -> mean={naive_mu_adult:.3f}, n={len(naive_pile_adult)}")
+print(f"  'Child' pile  mean={naive_mu_child:.3f}, n={len(naive_pile_child)}")
+print(f"  'Adult' pile  mean={naive_mu_adult:.3f}, n={len(naive_pile_adult)}")
 print(f"  Classification accuracy vs true origin: {naive_accuracy:.3%}")
 print(f"EM model classification accuracy vs true origin: {em_accuracy:.3%}")
 
@@ -135,7 +136,7 @@ def classify_height(h, mu1, mu2, s1, s2, pi1, pi2):
 def plot_em_results(X, history, mu1f, mu2f, s1f, s2f, pi1f, pi2f):
     fig, (ax_fit, ax_ll) = plt.subplots(1, 2, figsize=(13, 5))
 
-    # Left: pooled histogram + initial vs converged Gaussian fits.
+    # Left: pooled histogram plus initial vs converged Gaussian fits.
     _, edges, _ = ax_fit.hist(X, bins=32, color="0.6", alpha=0.35,
                                label="Pooled histogram (unlabeled)")
     bin_width = edges[1] - edges[0]
@@ -159,8 +160,10 @@ def plot_em_results(X, history, mu1f, mu2f, s1f, s2f, pi1f, pi2f):
     ax_fit.set_title("Mixture of two Gaussians: initial guess vs converged fit")
     ax_fit.legend(fontsize=8)
 
-    # Right: log-likelihood convergence (log-scaled x so the early jump
-    # and the long flat tail are both visible)
+    """ 
+    Right: log-likelihood convergence (log-scaled x so the early jump
+    and the long flat tail are both visible)
+    """
     its = [row[0] for row in history]
     lls = [row[7] for row in history]
     ax_ll.plot(its, lls, "C0-", lw=2)
