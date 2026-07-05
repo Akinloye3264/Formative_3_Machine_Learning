@@ -1,4 +1,4 @@
-# Formative 3 — Probability Distributions, Bayesian Probability & Gradient Descent
+# Formative 3: Probability Distributions, Bayesian Probability & Gradient Descent
 
 **Course:** Mathematics for Machine Learning
 **Team members:** Emmanuel Akinloye, Peggy Dusunge, Junior Nkuba, Janviere Munezero
@@ -20,7 +20,7 @@ This project covers four topics: separating mixed data with the EM algorithm, cl
 
 ## 1. Overview
 
-The work splits into two themes. Parts 1 and 2 are about **probability** — modelling data with distributions and updating beliefs with Bayes' rule. Parts 3 and 4 are about **optimization** — fitting a model to data with gradient descent, first worked out on paper and then implemented in Python.
+The work splits into two themes. Parts 1 and 2 are about **probability**  modelling data with distributions and updating beliefs with Bayes' rule. Parts 3 and 4 are about **optimization**  fitting a model to data with gradient descent, first worked out on paper and then implemented in Python.
 
 | Part | Topic | Files |
 |------|-------|-------|
@@ -55,16 +55,16 @@ Or open `Probability_Distributions,_Bayesian_Probability,_and_Gradient_Descent_I
 
 ---
 
-## 3. Part 1 — EM Algorithm (Gaussian Mixture Model)
+## 3. Part 1: EM Algorithm (Gaussian Mixture Model)
 
 ### The problem
-We are given a set of heights from a room holding two groups — young children and adults — but with no labels saying who is who. Our task is to recover each group's average height, spread, and proportion using only the numbers.
+We are given a set of heights from a room holding two groups  young children and adults  but with no labels saying who is who. Our task is to recover each group's average height, spread, and proportion using only the numbers.
 
 ### Why we don't just split at the global mean
 Drawing a single line at the overall mean and averaging each side is tempting, but it is the wrong approach for three reasons:
 
 1. It forces a hard decision on the heights near the boundary. A tall child or a short adult sits right in the overlap, and a single cut-off assigns them with false certainty.
-2. It assumes both groups have the same spread. They don't — one group is more varied than the other — and treating them as equal distorts the estimated means.
+2. It assumes both groups have the same spread. They don't  one group is more varied than the other and treating them as equal distorts the estimated means.
 3. It gives one answer and stops. EM instead assigns each point a *probability* of belonging to each group, re-estimates the groups from those probabilities, and repeats until the fit stops improving.
 
 EM's advantage is these **soft assignments**: a point can be 90% child and 10% adult, and that weighting feeds into the next estimate rather than being thrown away.
@@ -106,11 +106,11 @@ P(Adult)     = 0.xxxx
 Classified as: CHILD / ADULT
 ```
 
-A short height returns almost entirely child, a tall one almost entirely adult, and a height in the overlap returns a genuine split — the soft-assignment behaviour that a hard mean split cannot produce.
+A short height returns almost entirely child, a tall one almost entirely adult, and a height in the overlap returns a genuine split  the soft-assignment behaviour that a hard mean split cannot produce.
 
 ---
 
-## 4. Part 2 — Bayesian Probability (IMDb Sentiment)
+## 4. Part 2: Bayesian Probability (IMDb Sentiment)
 
 ### The problem
 From a large set of labelled movie reviews, we ask: if a review contains a particular keyword, how likely is it to be positive? We answer with Bayes' theorem, written in plain Python with no machine-learning libraries.
@@ -150,7 +150,7 @@ Every probability is a ratio of counts, so no external libraries are needed.
 
 ---
 
-## 5. Part 3 — Manual Gradient Descent
+## 5. Part 3: Manual Gradient Descent
 
 ### The problem
 We fit a two-feature linear model ŷ = m₁x₁ + m₂x₂ + b to two data points by running gradient descent by hand, using matrix multiplication throughout. There are four iterations, one per team member.
@@ -187,7 +187,7 @@ The error falls steadily from 61 to 22, and every parameter moves smoothly in on
 
 ---
 
-## 6. Part 4 — Gradient Descent in Code
+## 6. Part 4: Gradient Descent in Code
 
 This turns the manual work into Python and adds the two required plots. The calculation steps are written out plainly rather than hidden inside a library call.
 
@@ -206,7 +206,7 @@ This turns the manual work into Python and adds the two required plots. The calc
 **MSE over iterations (right).** The error curve falls from 61 to 22. This is the clearest single picture of the model improving, and it answers the trend question directly.
 
 ### Checking the code against the hand calculation
-On paper we derived ∂J/∂m = (2/n)Xᵀe. SciPy computes the same slope numerically, and the two agree at every step — so the code confirms the hand-worked calculus and the manual and coded results line up exactly.
+On paper we derived ∂J/∂m = (2/n)Xᵀe. SciPy computes the same slope numerically, and the two agree at every step so the code confirms the hand-worked calculus and the manual and coded results line up exactly.
 
 ---
 
