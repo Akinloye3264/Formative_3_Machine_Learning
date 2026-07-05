@@ -206,23 +206,6 @@ On paper we derived ∂J/∂m = (2/n)Xᵀe. SciPy computes the same slope numeri
 
 ---
 
-## 7. Presentation notes
 
-A one-line summary each member can lead with:
-
-- **Part 1:** We avoid splitting at the mean because a hard line misclassifies the overlap and ignores the different spreads; EM uses soft probabilities and refines them until the log-likelihood settles.
-- **Part 2:** We chose P(Positive | keyword), counted word occurrences by sentiment in plain Python, and applied Bayes' theorem; positive keywords score near 1 and negative near 0.
-- **Part 3:** We ran gradient descent by hand with matrix multiplication, showing the chain rule for both derivatives; the error dropped from 61 to 22 over four iterations.
-- **Part 4:** The code mirrors the manual maths, uses SciPy for the derivative, and the two plots show the parameters settling and the error falling.
-
-Questions we are ready for:
-
-- *Why does SciPy's gradient match the formula?* Both evaluate the same derivative at the same point; SciPy does it numerically.
-- *Why is b one number and m two?* Two features give two weights, and there is one shared bias.
-- *Why α = 0.001?* A small, stable step size; larger values converge faster but risk overshooting.
-- *Why a set of words in the tokenizer?* So each word is counted once per review, measuring presence rather than frequency.
-- *Why the 25th/75th percentile start in EM?* It places one Gaussian low and one high so they separate cleanly into the two real groups.
-
----
 
 *Repository contents: `Em_gmm_heights.py`, `main.py`, `Gradient.py`, this README, the handwritten Part 3 PDF, the contributions document, and the Jupyter notebook with all implementations and plots.*
