@@ -25,11 +25,13 @@ The work splits into two themes. Parts 1 and 2 are about **probability** — mod
 | Part | Topic | Files |
 |------|-------|-------|
 | 1 | Expectation-Maximization on a height mixture | `Em_gmm_heights.py` |
-| 2 | Bayes' theorem on IMDb reviews | `main.py` |
-| 3 | Manual gradient descent (4 iterations) | handwritten PDF |
+| 2 | Bayes' theorem on IMDb reviews | `bayesian/main.py` |
+| 3 | Manual gradient descent (4 iterations) | `Formative3-Part3.pdf` (handwritten) |
 | 4 | Gradient descent in Python + plots | `Gradient.py` |
 
-Datasets used: `GaltonFamilies.csv` (Part 1) and `IMDB_Dataset.csv` (Part 2). Place both in the same folder as the scripts.
+All four parts are also implemented together, with plots, in `Probability_Distributions,_Bayesian_Probability,_and_Gradient_Descent_Implementation.ipynb`.
+
+Datasets used: `GaltonFamilies.csv` (Part 1, repo root) and `bayesian/IMDB_Dataset.csv` (Part 2).
 
 ---
 
@@ -45,9 +47,11 @@ Then run each part:
 
 ```bash
 python Em_gmm_heights.py    # Part 1 — prints the tracking table, then asks for a test height
-python main.py              # Part 2 — prints the keyword probability table
+python bayesian/main.py     # Part 2 — prints the keyword probability table
 python Gradient.py          # Part 4 — prints each iteration and opens the two plots
 ```
+
+Or open `Probability_Distributions,_Bayesian_Probability,_and_Gradient_Descent_Implementation.ipynb` in Jupyter to run all four parts, with plots, in one place.
 
 ---
 
@@ -208,4 +212,4 @@ On paper we derived ∂J/∂m = (2/n)Xᵀe. SciPy computes the same slope numeri
 
 Documentation used for presentation: https://app.notion.com/p/Formative-3-Probability-Distributions-Bayesian-Probability-Gradient-Descent-Documentation-abac50d040fa473c96dfe130680fceff
 
-*Repository contents: `Em_gmm_heights.py`, `main.py`, `Gradient.py`, this README, the handwritten Part 3 PDF, the contributions document, and the Jupyter notebook with all implementations and plots.*
+*Repository contents: `Em_gmm_heights.py`, `Gradient.py`, `bayesian/main.py` and `bayesian/IMDB_Dataset.csv`, `GaltonFamilies.csv`, the handwritten Part 3 PDF (`Formative3-Part3.pdf`), the task sheet, this README, and the Jupyter notebook with all four parts implemented together.*
