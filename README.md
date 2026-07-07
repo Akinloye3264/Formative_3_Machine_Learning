@@ -210,6 +210,7 @@ On paper we derived ∂J/∂m = (2/n)Xᵀe. SciPy computes the same slope numeri
 
 ---
 
-Documentation used for presentation: https://app.notion.com/p/Formative-3-Probability-Distributions-Bayesian-Probability-Gradient-Descent-Documentation-abac50d040fa473c96dfe130680fceff
+Documentation used for presentation: 
+https://app.notion.com/p/Formative-3-Code-Documentation-b86d073c22e340f182c7b9296dc1aea9
 
 *Repository contents: `Em_gmm_heights.py`, `Gradient.py`, `bayesian/main.py` and `bayesian/IMDB_Dataset.csv`, `GaltonFamilies.csv`, the handwritten Part 3 PDF (`Formative3-Part3.pdf`), the task sheet, this README, and the Jupyter notebook with all four parts implemented together.*
